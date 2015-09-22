@@ -1,6 +1,8 @@
 express-brute-pg
 ===================
 
+[![Build Status](https://travis-ci.org/dmfay/express-brute-pg.svg?branch=master)](https://travis-ci.org/dmfay/express-brute-pg)
+
 A PostgreSQL store for [express-brute](https://github.com/AdamPflug/express-brute) via [node-postgres](https://github.com/brianc/node-postgres).
 
 Installation
@@ -41,7 +43,7 @@ Options
 - `host`         Postgres server host name or IP address
 - `database`     Database name to connect to
 - `username`     Database username
-- `password`     Corresponding password
+- `password`     Corresponding password, if password authentication is required
 - `tableName`    Include to use a storage table named something other than `brute`
 - `schemaName`   Include if your storage table is in a schema other than `public`
 - `pg`           You may pass in your application's `pg` module to `express-brute-pg` to share connection pools or use the native bindings; if not supplied, `express-brute-pg` will spin up its own pool

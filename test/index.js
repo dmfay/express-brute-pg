@@ -6,9 +6,8 @@ describe('express-brute Postgres store', function () {
 
 	beforeEach(function () {
 		instance = new PgStore({
-			database: 'sandbox',
-			username: 'appuser',
-			password: 'password'
+			database: 'brute_pg',
+			username: 'postgres'
 		});
 	});
 

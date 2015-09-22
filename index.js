@@ -14,9 +14,17 @@ var PgStore = module.exports = function (options) {
 PgStore.prototype = Object.create(AbstractClientStore.prototype);
 
 PgStore.prototype.connect = function (callback) {
-	var password = encodeURIComponent(this.options.password);
+	var string;
 
-	this.pg.connect('postgres://' + this.options.username + ':' + password + '@' + this.options.host + '/' + this.options.database, callback);
+	if (this.options.hasOwnProperty('password')) {
+		var password = encodeURIComponent(this.options.password);
+	
+		string = util.format('postgres://%s:%s@%s/%s', this.options.username, password, this.options.host, this.options.database);
+	} else {
+		string = util.format('postgres://%s@%s/%s', this.options.username, this.options.host, this.options.database);
+	}
+
+	this.pg.connect(string, callback);
 };
 
 PgStore.prototype.set = function (key, value, lifetime, callback) {
