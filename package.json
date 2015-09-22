@@ -1,0 +1,30 @@
+{
+  "name": "express-brute-pg",
+  "version": "0.0.1",
+  "description": "A PostgreSQL store for express-brute",
+  "keywords": [
+    "express",
+    "brute",
+    "postgres",
+    "pg"
+  ],
+  "license": "BSD",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dmfay/express-brute-pg.git"
+  },
+  "devDependencies": {
+    "async": "~0.2.9",
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "proxyquire": "~0.5.0"
+  },
+  "dependencies": {
+    "express-brute": "^0.6.0",
+    "humps": "^0.7.0",
+    "moment": "^2.10.6",
+    "pg": "^4.4.2",
+    "underscore": "~1.5.1"
+  }
+}
