@@ -6,19 +6,22 @@
     "express",
     "brute",
     "postgres",
+    "postgresql",
     "pg"
   ],
-  "license": "BSD",
+  "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
     "url": "git@github.com:dmfay/express-brute-pg.git"
   },
+  "author": {
+    "name": "Dian M Fay",
+    "email": "dian.m.fay@gmail.com"
+  },
   "devDependencies": {
-    "async": "~0.2.9",
     "chai": "^3.3.0",
-    "mocha": "^2.3.3",
-    "proxyquire": "~0.5.0"
+    "mocha": "^2.3.3"
   },
   "dependencies": {
     "express-brute": "^0.6.0",

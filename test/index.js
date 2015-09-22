@@ -1,5 +1,4 @@
-var proxyquire = require('proxyquire').noCallThru(),
-	assert = require('chai').assert;
+var assert = require('chai').assert;
 var PgStore = require('../');
 
 describe('express-brute Postgres store', function () {
