@@ -14,14 +14,16 @@ var PgStore = module.exports = function (options) {
 PgStore.prototype = Object.create(AbstractClientStore.prototype);
 
 PgStore.prototype.connect = function (callback) {
-	this.pg.connect('postgres://' + this.options.username + ':' + this.options.password + '@' + this.options.host + '/' + this.options.database, callback);
+	var password = encodeURIComponent(this.options.password);
+
+	this.pg.connect('postgres://' + this.options.username + ':' + password + '@' + this.options.host + '/' + this.options.database, callback);
 };
 
 PgStore.prototype.set = function (key, value, lifetime, callback) {
 	var self = this;
 
 	this.connect(function (err, client, done) {
-		if (err) { return callback(err); }
+		if (err) { return typeof callback === 'function' && callback(err); }
 
 		var expiry;
 
@@ -40,13 +42,13 @@ PgStore.prototype.set = function (key, value, lifetime, callback) {
 				}, function (err, result) {
 					done();
 
-					callback(err);
+					return typeof callback === 'function' && callback(err);
 				});
 			}
 
 			done();
 
-			callback(err);
+			return typeof callback === 'function' && callback(err);
 		});
 	});
 };
@@ -55,7 +57,7 @@ PgStore.prototype.get = function (key, callback) {
 	var self = this;
 
 	this.connect(function (err, client, done) {
-		if (err) { return callback(err); }
+		if (err) { return typeof callback === 'function' && callback(err); }
 
 		client.query({
 			text: util.format('SELECT "id", "count", "first_request", "last_request", "expires" FROM "%s"."%s" WHERE "id" = $1', self.options.schemaName, self.options.tableName),
@@ -70,13 +72,13 @@ PgStore.prototype.get = function (key, callback) {
 				}, function (err) {
 					done();
 
-					callback(err, null);
+					return typeof callback === 'function' && callback(err, null);
 				});
 			}
 
 			done();
 
-			callback(err, result.rowCount ? humps.camelizeKeys(result.rows[0]) : null);
+			return typeof callback === 'function' && callback(err, result.rowCount ? humps.camelizeKeys(result.rows[0]) : null);
 		});
 	});
 };
@@ -85,7 +87,7 @@ PgStore.prototype.reset = function (key, callback) {
 	var self = this;
 
 	this.connect(function (err, client, done) {
-		if (err) { return callback(err); }
+		if (err) { return typeof callback === 'function' && callback(err); }
 
 		return client.query({
 			text: util.format('DELETE FROM "%s"."%s" WHERE "id" = $1 RETURNING *', self.options.schemaName, self.options.tableName),
@@ -94,7 +96,7 @@ PgStore.prototype.reset = function (key, callback) {
 		}, function (err, result) {
 			done();
 
-			callback(err, result.rowCount ? humps.camelizeKeys(result.rows[0]) : null);
+			return typeof callback === 'function' && callback(err, result.rowCount ? humps.camelizeKeys(result.rows[0]) : null);
 		});
 	});
 };
