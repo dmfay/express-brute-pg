@@ -2,7 +2,7 @@ var AbstractClientStore = require('express-brute/lib/AbstractClientStore'),
 	humps = require('humps'),
 	moment = require('moment'),
 	util = require('util'),
-	_ = require('underscore');
+	_ = require('lodash');
 
 var PgStore = module.exports = function (options) {
 	AbstractClientStore.apply(this, arguments);
@@ -18,7 +18,7 @@ PgStore.prototype.connect = function (callback) {
 
 	if (this.options.hasOwnProperty('password')) {
 		var password = encodeURIComponent(this.options.password);
-	
+
 		string = util.format('postgres://%s:%s@%s/%s', this.options.username, password, this.options.host, this.options.database);
 	} else {
 		string = util.format('postgres://%s@%s/%s', this.options.username, this.options.host, this.options.database);

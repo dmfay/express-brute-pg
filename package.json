@@ -22,15 +22,15 @@
   "scripts": {
     "test": "mocha"
   },
+  "dependencies": {
+    "express-brute": "^1.0.1",
+    "humps": "^2.0.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.10.6",
+    "pg": "^6.1.2"
+  },
   "devDependencies": {
     "chai": "^3.3.0",
-    "mocha": "^2.3.3"
-  },
-  "dependencies": {
-    "express-brute": "^0.6.0",
-    "humps": "^0.7.0",
-    "moment": "^2.10.6",
-    "pg": "^4.4.2",
-    "underscore": "~1.5.1"
+    "mocha": "^3.2.0"
   }
 }
