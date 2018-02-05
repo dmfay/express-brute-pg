@@ -8,29 +8,15 @@ var PgStore = module.exports = function (options) {
 	AbstractClientStore.apply(this, arguments);
 
 	this.options = _.extend({}, PgStore.defaults, options);
-	this.pg = options.pg || require('pg');	// allow passing in native pg client
+    this.pool = options.pool || new (require('pg')).Pool(this.options);
 };
 
 PgStore.prototype = Object.create(AbstractClientStore.prototype);
 
-PgStore.prototype.connect = function (callback) {
-	var string;
-
-	if (this.options.hasOwnProperty('password')) {
-		var password = encodeURIComponent(this.options.password);
-
-		string = util.format('postgres://%s:%s@%s/%s', this.options.username, password, this.options.host, this.options.database);
-	} else {
-		string = util.format('postgres://%s@%s/%s', this.options.username, this.options.host, this.options.database);
-	}
-
-	this.pg.connect(string, callback);
-};
-
 PgStore.prototype.set = function (key, value, lifetime, callback) {
 	var self = this;
 
-	this.connect(function (err, client, done) {
+	this.pool.connect(function (err, client, done) {
 		if (err) { return typeof callback === 'function' && callback(err); }
 
 		var expiry;
@@ -64,7 +50,7 @@ PgStore.prototype.set = function (key, value, lifetime, callback) {
 PgStore.prototype.get = function (key, callback) {
 	var self = this;
 
-	this.connect(function (err, client, done) {
+	this.pool.connect(function (err, client, done) {
 		if (err) { return typeof callback === 'function' && callback(err); }
 
 		client.query({
@@ -94,7 +80,7 @@ PgStore.prototype.get = function (key, callback) {
 PgStore.prototype.reset = function (key, callback) {
 	var self = this;
 
-	this.connect(function (err, client, done) {
+	this.pool.connect(function (err, client, done) {
 		if (err) { return typeof callback === 'function' && callback(err); }
 
 		return client.query({

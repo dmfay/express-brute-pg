@@ -46,4 +46,4 @@ Options
 - `password`     Corresponding password, if password authentication is required
 - `tableName`    Include to use a storage table named something other than `brute`
 - `schemaName`   Include if your storage table is in a schema other than `public`
-- `pg`           You may pass in your application's `pg` module to `express-brute-pg` to share connection pools or use the native bindings; if not supplied, `express-brute-pg` will spin up its own pool
+- `pool`         You may pass in your application's `pool` instance to `express-brute-pg` to share connection pools or use the native bindings; if not supplied, `express-brute-pg` will spin up its own pool
