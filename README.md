@@ -1,7 +1,7 @@
 express-brute-pg
 ===================
 
-[![Build Status](https://travis-ci.org/dmfay/express-brute-pg.svg?branch=master)](https://travis-ci.org/dmfay/express-brute-pg)
+[![pipeline status](https://gitlab.com/dmfay/express-brute-pg/badges/master/pipeline.svg)](https://gitlab.com/dmfay/express-brute-pg/commits/master)
 
 A PostgreSQL store for [express-brute](https://github.com/AdamPflug/express-brute) via [node-postgres](https://github.com/brianc/node-postgres).
 

@@ -13,7 +13,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git@github.com:dmfay/express-brute-pg.git"
+    "url": "git@gitlab.com:dmfay/express-brute-pg.git"
   },
   "author": {
     "name": "Dian M Fay",
